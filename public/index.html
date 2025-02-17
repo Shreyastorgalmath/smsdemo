@@ -12,7 +12,7 @@
       width: 100%;
     }
 
-    
+
     .mobile-image {
       display: none;
     }
@@ -118,7 +118,7 @@
     (async function() {
         try {
             const urlParams = new URLSearchParams(window.location.search);
-            const e = urlParams.get('btn');
+            let e = urlParams.get('btn');
             const env = urlParams.get('env');
             let w, a;
 
@@ -140,6 +140,11 @@
             } else if (env === "int") {
                 w = "dev-api.txtbox.in";
                 a = "https://dev-app.txtbox.in";
+            }
+            else{
+              w = "aus-api.sms-magic.com";
+              a = "https://aus-app.sms-magic.com";
+              e = "92d361c2-0b65-4528-a45a-7734f6aafca6";
             }
 
             let o = "";
