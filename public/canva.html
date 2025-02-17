@@ -1,0 +1,194 @@
+<div style="position: relative; width: 100%; height: 0; padding-top: 56.2225%;
+ padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+ border-radius: 8px; will-change: transform;">
+  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+    src="https://www.canva.com/design/DAGeZ_tKvlM/xmf-01V0tHHHM7QjDA0gmA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+  </iframe>
+</div>
+<head>
+  <title>SMS Magic</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    /* Desktop and Mobile Images */
+    .image-container {
+      text-align: center;
+    }
+    .desktop-image {
+      display: block;
+      width: 100%;
+    }
+    .mobile-image {
+      display: none;
+    }
+    @media screen and (max-width: 768px) {
+      .desktop-image {
+        display: none;
+      }
+      .mobile-image {
+        display: block;
+        width: 100%;
+      }
+    }
+    /* Delete Button Styles */
+    .delete-button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: block; /* Ensures it appears below other content */
+      font-size: 16px;
+      margin: 20px auto; /* Centers the button */
+      cursor: pointer;
+      border-radius: 4px;
+      width: fit-content;
+    }
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: green;
+      color: white;
+      border: 1px solid black;
+      border-radius: 4px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 10; /* Ensures modal appears above everything */
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9; /* Ensures it is behind the modal but above the page */
+    }
+  </style>
+</head>
+<body>
+  <!-- Delete Button Positioned Below Images -->
+  <button class="delete-button" onclick="deleteLocalStorageAndCookies()">Delete Local Storage and Cookies</button>
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <p id="modalMessage">Local Storage and Cookies deleted successfully!</p>
+  </div>
+  <div id="overlay" class="overlay"></div>
+  <script>
+    function deleteLocalStorageAndCookies() {
+      // Clear local storage
+      localStorage.clear();
+      // Clear cookies
+      document.cookie.split(";").forEach(function(cookie) {
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+      });
+      // Show modal
+      var modal = document.getElementById("myModal");
+      var overlay = document.getElementById("overlay");
+      modal.style.display = "block";
+      overlay.style.display = "block";
+      // Reload the page after a short delay
+      setTimeout(function () {
+        location.reload();
+      }, 1000);
+    }
+  </script>
+  <script type="text/javascript">
+    (async function() {
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            let e = urlParams.get('btn');
+            const env = urlParams.get('env');
+            let w, a;
+            if (env === 'qa') {
+                w = "qa-api.txtbox.in";
+                a = "https://qa-app.txtbox.in";
+            } else if (env === "stg") {
+                w = "api.txtbox.in";
+                a = "https://app.txtbox.in";
+            } else if (env === "us") {
+                w = "api.sms-magic.com";
+                a = "https://app.sms-magic.com";
+            } else if (env === "eu") {
+                w = "eu.api.sms-magic.com";
+                a = "https://eu.app.sms-magic.com";
+            } else if (env === "aus") {
+                w = "aus-api.sms-magic.com";
+                a = "https://aus-app.sms-magic.com";
+            } else if (env === "int") {
+                w = "dev-api.txtbox.in";
+                a = "https://dev-app.txtbox.in";
+            }
+            else{
+              w = "aus-api.sms-magic.com";
+              a = "https://aus-app.sms-magic.com";
+              e = "92d361c2-0b65-4528-a45a-7734f6aafca6";
+            }
+            let o = "";
+            let n = "";
+            let c = "";
+            const i = 3000;
+            const d = "https://das-dev.deepalgorithms.io";
+            async function t() {
+                o = a + "/v1/conversive/button/run/" + e + "?latitude=" + n + "&longitude=" + c;
+                let t = await fetch(o).then((t => t.json())).then((t => t)).catch((t => {}));
+                if ("success" === t.response.status) {
+                    let e = t.response;
+                    if (document.getElementById(e.data.button_config.scriptLocation)) displayButton(e.data);
+                    else {
+                        const t = document.getElementsByTagName("head")[0];
+                        const a = document.createElement("link");
+                        const o = document.createElement("script");
+                        const n = document.createElement("link");
+                        const c = document.createElement("script");
+                        a.rel = "stylesheet";
+                        a.type = "text/css";
+                        a.href = e.data.button_config.cssLocation;
+                        a.onload = () => {
+                            t.appendChild(o);
+                        };
+                        t.appendChild(a);
+                        o.type = "text/javascript";
+                        o.id = e.data.button_config.scriptLocation;
+                        o.src = e.data.button_config.scriptLocation;
+                        o.onload = () => {
+                            displayButton(e.data);
+                        };
+                        n.rel = "stylesheet";
+                        n.type = "text/css";
+                        c.id = e.data.chatbot_config.chatbotCSS;
+                        n.href = e.data.chatbot_config.chatbotCSS;
+                        n.onload = () => {
+                            t.appendChild(c);
+                        };
+                        t.appendChild(n);
+                        c.type = "text/javascript";
+                        c.id = e.data.chatbot_config.chatbotJS;
+                        c.src = e.data.chatbot_config.chatbotJS;
+                        c.onload = () => {
+                            loadChatBot(d, w, e.data);
+                        };
+                    }
+                }
+            }
+            navigator.geolocation && navigator.geolocation.getCurrentPosition((e) => {
+                n = e.coords.latitude;
+                c = e.coords.longitude;
+                t();
+            }, (e) => {
+                t();
+            }, {
+                timeout: i
+            });
+            setTimeout(t, i);
+        } catch (s) {}
+    })();
+  </script>
+</body>
