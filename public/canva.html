@@ -34,16 +34,18 @@
       text-decoration: none;
       display: block;
       font-size: 16px;
-      margin: 10px auto;
       cursor: pointer;
       border-radius: 4px;
-      width: fit-content;
+    }
+    .image-container {
+      text-align: center;
+      position: relative;
     }
     .button-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 20px 0;
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      z-index: 5;
     }
     /* Modal Styles */
     .modal {
@@ -75,11 +77,9 @@
 <body>
   <div class="image-container">
     <!-- Your images would go here -->
-  </div>
-
-  <!-- Button Container -->
-  <div class="button-container">
-    <button class="action-button" onclick="resetConversation()">Reset Conversation</button>
+    <div class="button-container">
+      <button class="action-button" onclick="resetConversation()">Reset Conversation</button>
+    </div>
   </div>
 
   <!-- Modal -->
